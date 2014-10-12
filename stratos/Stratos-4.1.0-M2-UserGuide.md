@@ -77,6 +77,11 @@ Testing M2
 curl -X POST -H "Content-Type: application/json" -d @"kub-register.json" -k  -u admin:admin "https://localhost:9443/stratos/admin/kubernetes/deploy/group"
 ```
 
+### CLI Command
+```bash
+deploy-kubernetes-group -p kubernetes-group.json
+```
+
 ###kub-register.json
 ```javascript
 {
@@ -161,11 +166,48 @@ curl -X POST -H "Content-Type: application/json" -d @"kub-register.json" -k  -u 
 {"kubernetesGroup":{"description":"Kubernetes CoreOS cluster on EC2 ","groupId":"KubGrp1","kubernetesHosts":[{"hostId":"KubHostSlave1","hostIpAddress":"172.17.8.101","hostname":"slave1.dev.kubernetes.example.org","property":[{"name":"prop1","value":"val1"},{"name":"prop2","value":"val2"}]},{"hostId":"KubHostSlave2","hostIpAddress":"172.17.8.102","hostname":"slave2.dev.kubernetes.example.org","property":[{"name":"prop1","value":"val1"},{"name":"prop2","value":"val2"}]}],"kubernetesMaster":{"hostId":"KubHostMaster1","hostIpAddress":"172.17.8.100","hostname":"master.dev.kubernetes.example.org","property":[{"name":"prop1","value":"val1"},{"name":"prop2","value":"val2"}]},"portRange":{"lower":4000,"upper":5000},"property":[{"name":"prop1","value":"val1"},{"name":"prop2","value":"val2"}]}}
 ```
 
+### CLI Command
+```bash
+list-kubernetes-groups
+```
+
+#### Response
+```
+Kubernetes groups found:
++----------+-----------------------------------+
+| Group ID | Description                       |
++----------+-----------------------------------+
+| KubGrp1  | Kubernetes CoreOS cluster on EC2  |
++----------+-----------------------------------+
+```
+
+### CLI Command
+```bash
+list-kubernetes-hosts KubGrp1
+```
+
+#### Response
+``` 
+Kubernetes hosts found:
++---------------+-----------------------------------+--------------+
+| Host ID       | Hostname                          | IP Address   |
++---------------+-----------------------------------+--------------+
+| KubHostSlave1 | slave1.dev.kubernetes.example.org | 172.17.8.101 |
++---------------+-----------------------------------+--------------+
+| KubHostSlave2 | slave2.dev.kubernetes.example.org | 172.17.8.102 |
++---------------+-----------------------------------+--------------+
+```
+
 ##2. Deploy a Docker Cartridge
 
 ###Curl Command
 ``` sh 
 curl -X POST -H "Content-Type: application/json" -d @'php-docker-cartridge.json' -k -v -u admin:admin "https://localhost:9443/stratos/admin/cartridge/definition"
+```
+
+### CLI Command
+```bash
+deploy-cartridge -p php-docker-cartridge.json
 ```
 
 ###php-docker-cartridge.json
@@ -205,6 +247,11 @@ curl -X POST -H "Content-Type: application/json" -d @'php-docker-cartridge.json'
 ###Curl Command
 curl -X POST -H "Content-Type: application/json" -d @'autoscale-policy.json' -k -v -u admin:admin “https://localhost:9443/stratos/admin/policy/autoscale”
 
+### CLI Command
+```bash
+deploy-autoscaling-policy -p autoscale-policy.json
+```
+
 ###autoscale-policy.json
 ```javascript
 {
@@ -232,6 +279,12 @@ curl -X POST -H "Content-Type: application/json" -d @'autoscale-policy.json' -k 
 ``` sh 
 curl -X POST -H "Content-Type: application/json" -d @php-subscription.json -k -v -u admin:admin "https://localhost:9443/stratos/admin/cartridge/subscribe"
 ```
+
+### CLI Command
+```bash
+subscribe-cartridge --autoscaling-policy economy -p php-cartridge-subscription.json
+```
+
 
 ###php-subscription.json
 
@@ -286,6 +339,11 @@ curl -X POST -H "Content-Type: application/json" -d @php-subscription.json -k -v
 ###Curl Command
 ```sh
 curl -X POST -H "Content-Type: application/json" -d 'myphp' -k -v -u admin:admin "https://localhost:9443/stratos/admin/cartridge/unsubscribe"
+```
+
+### CLI Command
+```bash
+unsubscribe-cartridge myphp
 ```
 
 ##6. Accessing PHP service
