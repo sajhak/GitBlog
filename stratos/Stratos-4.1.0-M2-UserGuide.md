@@ -30,11 +30,11 @@ Pre-requisite
     * SSH to master node ; ``` {SETUP_HOME}$ vagrant ssh master ```
     * Pull Stratos PHP Docker Image from DockerHub into master node or into the local machine.
     ``` sh 
-    docker pull apachestratos/php:4.1.0-m2
+    docker pull apachestratos/php-4.1.0-m2 
     ```
     * Import downloaded Stratos PHP Docker image as a tarball.
     ```sh
-    docker save -o stratos-php-latest.tar  apachestratos/php:4.1.0-m2
+    docker save -o stratos-php-latest.tar  apachestratos/php-4.1.0-m2 
     ```     
     * SCP the Stratos PHP Docker Image tarball to minion-1 and minion-2. You can find the private key file which you can use to SCP, in the **{SETUP_HOME}/ssh.config** file, against **IdentityFile** attribute. 
     ``` sh
@@ -49,7 +49,7 @@ Pre-requisite
     ```sh
     core@master ~ $ docker images
     REPOSITORY                   TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
-    apachestratos/php:4.1.0-m2   latest              0fff8e5ac572        3 hours ago         452.1 MB
+    apachestratos/php-4.1.0-m2   latest              0fff8e5ac572        3 hours ago         452.1 MB
     ```
 
 - Download and extract [Apache ActiveMQ 5.10.0 or later](http://activemq.apache.org/) and start ActiveMQ - ``` {ACTIVEMQ_HOME}$ ./bin/activemq start ```
