@@ -297,6 +297,34 @@ Then access from one of the following URLs:
 - http://172.17.8.101:{SERVICE_PORT}
 - http://172.17.8.102:{SERVICE_PORT}
 
+
+
+**7. Testing Autoscaling**
+
+Currently autoscaling works based on CPU and Memory usage. You can stress docker containers using stress tool.
+
+- ssh to the coreos node which is having containers (see trouble shoot guide at the end)
+
+- Install stress tool
+
+```sh
+apt-get install stress
+```
+
+- stress the container
+
+```sh
+stress -c 4
+```
+
+- observe the stratos log, you will get drools logs regarding scaling
+
+- check the number of pods in master node
+
+```sh
+kubecfg list /pods
+```
+
 Jira List
 ----------
 
