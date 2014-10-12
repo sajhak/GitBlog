@@ -1,4 +1,4 @@
-Stratos 4.1.0 - M1 - Developer Preview - Getting Started Guide
+Stratos 4.1.0 - M2 - Developer Preview - Getting Started Guide
 =========
 
 Table of Content
@@ -66,7 +66,7 @@ Pre-requisite
 - Start Stratos using ``` {STRATOS_HOME}$ ./bin/stratos.sh start ``` command.
 
 
-Testing M1
+Testing M2
 ----------
 
 **1. Register Kubernetes-CoreOS Host Cluster in Stratos**
