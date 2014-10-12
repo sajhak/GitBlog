@@ -29,7 +29,7 @@ Pre-requisite
     * SSH to master node ; ``` {SETUP_HOME}$ vagrant ssh master ```
     * Pull Stratos PHP Docker Image from DockerHub into master node or into the local machine.
     ``` sh 
-    docker pull apachestratos/php-4.1.0-m1
+    docker pull apachestratos/php:4.1.0-m1
     ```
     * Import downloaded Stratos PHP Docker image as a tarball.
     ```sh
