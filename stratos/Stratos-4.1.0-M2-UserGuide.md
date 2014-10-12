@@ -69,7 +69,38 @@ Pre-requisite
 Testing M1
 ----------
 
-**1. Register Kubernetes-CoreOS Host Cluster in Stratos**
+**1. Deploy Autoscaling Policy**
+
+- Curl Command
+
+``` sh 
+curl -X POST -H "Content-Type: application/json" -d @'autoscale-policy.json' -k -v -u admin:admin "https://localhost:9443/stratos/admin/policy/autoscale"
+```
+
+**autoscale-policy.json**
+```javascript
+{
+   "id": "economy",
+   "loadThresholds": {
+       "requestsInFlight": {
+          "upperLimit": 80,
+          "lowerLimit": 5
+        },
+        "memoryConsumption": {
+          "upperLimit": 80,
+          "lowerLimit": 15
+        },
+          "loadAverage": {
+          "upperLimit": 180,
+          "lowerLimit": 20
+        }
+    }
+}
+
+
+```
+
+**2. Register Kubernetes-CoreOS Host Cluster in Stratos**
 
 - Curl Command
 
@@ -157,7 +188,7 @@ Response:
 {"kubernetesGroup":{"description":"Kubernetes CoreOS cluster on EC2 ","groupId":"KubGrp1","kubernetesHosts":[{"hostId":"KubHostSlave1","hostIpAddress":"172.17.8.101","hostname":"slave1.dev.kubernetes.example.org","property":[{"name":"prop1","value":"val1"},{"name":"prop2","value":"val2"}]},{"hostId":"KubHostSlave2","hostIpAddress":"172.17.8.102","hostname":"slave2.dev.kubernetes.example.org","property":[{"name":"prop1","value":"val1"},{"name":"prop2","value":"val2"}]}],"kubernetesMaster":{"hostId":"KubHostMaster1","hostIpAddress":"172.17.8.100","hostname":"master.dev.kubernetes.example.org","property":[{"name":"prop1","value":"val1"},{"name":"prop2","value":"val2"}]},"portRange":{"lower":4000,"upper":5000},"property":[{"name":"prop1","value":"val1"},{"name":"prop2","value":"val2"}]}}
 ```
 
-**2. Deploy a Docker Cartridge**
+**3. Deploy a Docker Cartridge**
 
 - Curl Command
 
@@ -185,7 +216,7 @@ curl -X POST -H "Content-Type: application/json" -d @'php-docker-cartridge.json'
        ],
        "container": [
         {
-          "imageName": "apachestratos/php-4.1.0-m1",
+          "imageName": "apachestratos/php:4.1.0-m2",
           "property": [
             {
              "name": "prop-name",
@@ -197,7 +228,7 @@ curl -X POST -H "Content-Type: application/json" -d @'php-docker-cartridge.json'
  }
 ```
 
-**3. Subscribe to a Docker Cartridge**	
+**4. Subscribe to a Docker Cartridge**	
 - Curl Command
 
 ``` sh 
@@ -212,6 +243,7 @@ curl -X POST -H "Content-Type: application/json" -d @php-subscription.json -k -v
     "cartridgeType": "php",
     "alias": "myphp",
     "commitsEnabled": "false",
+    "autoscalePolicy": "economy",
     "property": [
             {
              "name": "KUBERNETES_CLUSTER_ID",
@@ -246,12 +278,12 @@ curl -X POST -H "Content-Type: application/json" -d @php-subscription.json -k -v
 
 
 ```
-**4. Unsubscribe from a Cartridge**
+**5. Unsubscribe from a Cartridge**
 ```sh
 curl -X POST -H "Content-Type: application/json" -d 'myphp' -k -v -u admin:admin "https://localhost:9443/stratos/admin/cartridge/unsubscribe"
 ```
 
-**5. Accessing PHP service**
+**6. Accessing PHP service**
 
 Currently accessing via Load Balancer is not supported. You could access the service via **http://{HOST_IP}:{SERVICE_PORT}**.
 
