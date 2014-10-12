@@ -6,7 +6,7 @@ Table of Content
 
 - [Main Features](#main-features)
 - [Pre-requisite](#pre-requisite)
-- [Testing M1](#testing-m1)
+- [Testing M2](#testing-m2)
 - [Jira List](#jira-list)
 - [Troubleshooting Guide](#troubleshooting-guide)
 
