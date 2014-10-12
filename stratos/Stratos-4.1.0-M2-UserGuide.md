@@ -63,6 +63,9 @@ Pre-requisite
 - Change the property named **"java.naming.provider.url"** value to **tcp://{MB_IP}:61616** in **{STRATOS_HOME}/repository/deployment/server/outputeventadaptors/JMSOutputAdaptor.xml** file.
 
 
+- Change the **expiryTimeout** element's value in **{STRATOS_HOME}/repository/conf/autoscaler.xml** to 30000 (it is the maximum time a member can be in the pending state)
+
+
 - Start Stratos using ``` {STRATOS_HOME}$ ./bin/stratos.sh start ``` command.
 
 
@@ -296,6 +299,34 @@ Then access from one of the following URLs:
 - http://172.17.8.100:{SERVICE_PORT}
 - http://172.17.8.101:{SERVICE_PORT}
 - http://172.17.8.102:{SERVICE_PORT}
+
+
+
+**7. Testing Autoscaling**
+
+Currently autoscaling works based on CPU and Memory usage. You can stress docker containers using stress tool.
+
+- ssh to the coreos node which is having containers (see trouble shoot guide at the end)
+
+- Install stress tool
+
+```sh
+apt-get install stress
+```
+
+- stress the container
+
+```sh
+stress -c 4
+```
+
+- observe the stratos log, you will get drools logs regarding scaling
+
+- check the number of pods in master node
+
+```sh
+kubecfg list /pods
+```
 
 Jira List
 ----------
