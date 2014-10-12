@@ -63,6 +63,7 @@ Pre-requisite
 
 - Change the property named **"java.naming.provider.url"** value to **tcp://{MB_IP}:61616** in **{STRATOS_HOME}/repository/deployment/server/outputeventadaptors/JMSOutputAdaptor.xml** file.
 
+- Change the **expiryTimeout** element's value in **{STRATOS_HOME}/repository/conf/autoscaler.xml** to **30000** (it is the maximum time a member can be in the pending state)
 
 - Start Stratos using ``` {STRATOS_HOME}$ ./bin/stratos.sh start ``` command.
 
