@@ -6,7 +6,7 @@ Table of Content
 
 - [Main Features](#main-features)
 - [Pre-requisite](#pre-requisite)
-- [Testing M1](#testing-m1)
+- [Testing M2](#testing-m2)
 - [Jira List](#jira-list)
 - [Troubleshooting Guide](#troubleshooting-guide)
 
@@ -30,11 +30,11 @@ Pre-requisite
     * SSH to master node ; ``` {SETUP_HOME}$ vagrant ssh master ```
     * Pull Stratos PHP Docker Image from DockerHub into master node or into the local machine.
     ``` sh 
-    docker pull apachestratos/php:4.1.0-m2
+    docker pull apachestratos/php-4.1.0-m2 
     ```
     * Import downloaded Stratos PHP Docker image as a tarball.
     ```sh
-    docker save -o stratos-php-latest.tar  apachestratos/php:4.1.0-m2
+    docker save -o stratos-php-latest.tar  apachestratos/php-4.1.0-m2 
     ```     
     * SCP the Stratos PHP Docker Image tarball to minion-1 and minion-2. You can find the private key file which you can use to SCP, in the **{SETUP_HOME}/ssh.config** file, against **IdentityFile** attribute. 
     ``` sh
@@ -49,7 +49,7 @@ Pre-requisite
     ```sh
     core@master ~ $ docker images
     REPOSITORY                   TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
-    apachestratos/php:4.1.0-m2   latest              0fff8e5ac572        3 hours ago         452.1 MB
+    apachestratos/php-4.1.0-m2   latest              0fff8e5ac572        3 hours ago         452.1 MB
     ```
 
 - Download and extract [Apache ActiveMQ 5.10.0 or later](http://activemq.apache.org/) and start ActiveMQ - ``` {ACTIVEMQ_HOME}$ ./bin/activemq start ```
@@ -63,6 +63,7 @@ Pre-requisite
 
 - Change the property named **"java.naming.provider.url"** value to **tcp://{MB_IP}:61616** in **{STRATOS_HOME}/repository/deployment/server/outputeventadaptors/JMSOutputAdaptor.xml** file.
 
+- Change the **expiryTimeout** element's value in **{STRATOS_HOME}/repository/conf/autoscaler.xml** to **30000** (it is the maximum time a member can be in the pending state)
 
 - Start Stratos using ``` {STRATOS_HOME}$ ./bin/stratos.sh start ``` command.
 
@@ -230,7 +231,7 @@ deploy-cartridge -p php-docker-cartridge.json
        ],
        "container": [
         {
-          "imageName": "apachestratos/php:4.1.0-m2",
+          "imageName": "apachestratos/php-4.1.0-m2",
           "property": [
             {
              "name": "prop-name",
@@ -266,7 +267,7 @@ deploy-autoscaling-policy -p autoscale-policy.json
          "lowerLimit": 15
       },
       "loadAverage": {
-         "upperLimit": 80,
+         "upperLimit": 180,
          "lowerLimit": 20
       }
     }
@@ -359,6 +360,29 @@ Then access from one of the following URLs:
 - http://172.17.8.100:{SERVICE_PORT}
 - http://172.17.8.101:{SERVICE_PORT}
 - http://172.17.8.102:{SERVICE_PORT}
+
+
+##7. Testing Autoscaling
+
+Currently autoscaling works based on CPU and Memory usage. You can stress docker containers using stress tool.
+
+- ssh to the coreos node which is having containers (see trouble shoot guide at the end)
+
+- Install stress tool
+```sh
+apt-get install stress
+```
+- stress the container
+```sh
+stress -c 4
+```
+- observe the stratos log, you will get drools logs regarding scaling
+
+- check the number of pods in master node
+```sh
+kubecfg list /pods
+```
+
 
 Jira List
 ----------
