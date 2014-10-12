@@ -220,7 +220,7 @@ curl -X POST -H "Content-Type: application/json" -d @'autoscale-policy.json' -k 
          "lowerLimit": 15
       },
       "loadAverage": {
-         "upperLimit": 80,
+         "upperLimit": 180,
          "lowerLimit": 20
       }
     }
