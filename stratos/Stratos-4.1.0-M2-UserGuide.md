@@ -1,4 +1,4 @@
-Stratos 4.1.0 - M1 - Developer Preview - Getting Started Guide
+Stratos 4.1.0 - M2 - Developer Preview - Getting Started Guide
 =========
 
 Table of Content
@@ -6,7 +6,7 @@ Table of Content
 
 - [Main Features](#main-features)
 - [Pre-requisite](#pre-requisite)
-- [Testing M1](#testing-m1)
+- [Testing M2](#testing-m1)
 - [Jira List](#jira-list)
 - [Troubleshooting Guide](#troubleshooting-guide)
 
