@@ -1,4 +1,4 @@
-Stratos 4.1.0 - M2 - Developer Preview - Getting Started Guide
+Stratos 4.1.0 - M3 - Developer Preview - Getting Started Guide
 =========
 
 Table of Content
