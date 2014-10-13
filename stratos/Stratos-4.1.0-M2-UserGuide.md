@@ -397,7 +397,7 @@ Jira List
 ----------
 
     
-**  Sub-task **
+**Sub-task**
 
 <ul>
 <li>[<a href='https://issues.apache.org/jira/browse/STRATOS-734'>STRATOS-734</a>] -         General Improvements to Stratos in docker image
@@ -406,7 +406,7 @@ Jira List
 </li>
 </ul>
             
-**  Bug **
+**Bug**
 
 <ul>
 <li>[<a href='https://issues.apache.org/jira/browse/STRATOS-377'>STRATOS-377</a>] -         Getting &quot;Tenant not found&quot; warning when subscribing cartridges as super tenant   
@@ -439,7 +439,7 @@ Jira List
 </li>
 </ul>
                 
-**     Improvement **
+**Improvement**
 
 <ul>
 <li>[<a href='https://issues.apache.org/jira/browse/STRATOS-603'>STRATOS-603</a>] -         Validate Git URL
@@ -460,7 +460,7 @@ Jira List
 </li>
 </ul>
     
-**       New Feature **
+**New Feature**
 
 <ul>
 <li>[<a href='https://issues.apache.org/jira/browse/STRATOS-761'>STRATOS-761</a>] -         Tenant isolation for policies and definitions - in Autoscalar
@@ -469,7 +469,7 @@ Jira List
 </li>
 </ul>
                                 
-**     Task **
+**Task**
 
 <ul>
 <li>[<a href='https://issues.apache.org/jira/browse/STRATOS-856'>STRATOS-856</a>] -         Need a wiki page for Performance Tuning
