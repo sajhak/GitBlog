@@ -30,11 +30,11 @@ Pre-requisite
     * SSH to master node ; ``` {SETUP_HOME}$ vagrant ssh master ```
     * Pull Stratos PHP Docker Image from DockerHub into master node or into the local machine.
     ``` sh 
-    docker pull apachestratos/php-4.1.0-m2 
+    docker pull apachestratos/php:4.1.0-m2 
     ```
     * Import downloaded Stratos PHP Docker image as a tarball.
     ```sh
-    docker save -o stratos-php-latest.tar  apachestratos/php-4.1.0-m2 
+    docker save -o stratos-php-latest.tar  apachestratos/php:4.1.0-m2 
     ```     
     * SCP the Stratos PHP Docker Image tarball to minion-1 and minion-2. You can find the private key file which you can use to SCP, in the **{SETUP_HOME}/ssh.config** file, against **IdentityFile** attribute. 
     ``` sh
@@ -49,7 +49,7 @@ Pre-requisite
     ```sh
     core@master ~ $ docker images
     REPOSITORY                   TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
-    apachestratos/php-4.1.0-m2   latest              0fff8e5ac572        3 hours ago         452.1 MB
+    apachestratos/php:4.1.0-m2   latest              0fff8e5ac572        3 hours ago         452.1 MB
     ```
 
 - Download and extract [Apache ActiveMQ 5.10.0 or later](http://activemq.apache.org/) and start ActiveMQ - ``` {ACTIVEMQ_HOME}$ ./bin/activemq start ```
@@ -231,7 +231,7 @@ deploy-cartridge -p php-docker-cartridge.json
        ],
        "container": [
         {
-          "imageName": "apachestratos/php-4.1.0-m2",
+          "imageName": "apachestratos/php:4.1.0-m2",
           "property": [
             {
              "name": "prop-name",
@@ -246,7 +246,9 @@ deploy-cartridge -p php-docker-cartridge.json
 ##3. Deploy the autoscale policy
 
 ###Curl Command
+```bash
 curl -X POST -H "Content-Type: application/json" -d @'autoscale-policy.json' -k -v -u admin:admin “https://localhost:9443/stratos/admin/policy/autoscale”
+```
 
 ### CLI Command
 ```bash
@@ -297,6 +299,9 @@ subscribe-cartridge --autoscaling-policy economy -p php-cartridge-subscription.j
     "alias": "myphp",
     "commitsEnabled": "false",
     "autoscalePolicy": "economy",
+    "repoURL": "https://github.com/sajhak/myphprepo",
+    "repoUsername": "sajhak@gmail.com",
+    "repoPassword": "sasa200",
     "property": [
             {
              "name": "KUBERNETES_CLUSTER_ID",
@@ -329,6 +334,10 @@ subscribe-cartridge --autoscaling-policy economy -p php-cartridge-subscription.j
             {
              "name": "payload_parameter.LOG_LEVEL",
              "value": "DEBUG"
+            },
+            {
+             "name": "payload_parameter.APP_PATH",
+             "value": "/var/www"
             }
           ]    
 }
