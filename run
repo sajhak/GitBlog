@@ -1,0 +1,6 @@
+#!/bin/bash
+source /root/.bashrc
+
+export JAVA_HOME=/opt/java
+export PATH=$PATH:$JAVA_HOME/bin
+cd /mnt/wso2as-5.2.1/bin/;./wso2server.sh & > /tmp/wso2carbon.log
