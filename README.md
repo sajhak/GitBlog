@@ -15,7 +15,8 @@ Create the image (Optional)
 ----------------------------
 Go to wso2as-docker directory, execute following command to create the image docker build -t wso2as .
 
-(Else, the preconfigured image in docker-hub sajhak/wso2as:5.2.1 can be used)
+(Else, the preconfigured image in docker-hub sajhak/wso2as:5.2.1 can be used,
+docker pull sajhak/wso2as:5.2.1)
 
 Start a WSO2 AS docker container
 --------------------------------
